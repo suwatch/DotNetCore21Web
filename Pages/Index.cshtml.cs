@@ -11,7 +11,13 @@ namespace DotNetCore21Web.Pages
     {
         public void OnGet()
         {
+            Task.Run(async () =>
+            {
+                var started = DateTime.UtcNow;
+                await Task.Delay(TimeSpan.FromMinutes(10));
 
+                Environment.FailFast($"{DateTime.UtcNow:s} Failfast intentionally since app started at {started:s}");
+            });
         }
     }
 }
